@@ -66,7 +66,7 @@ Welcome to the **Restaurant Application Backend**! This project is a robust back
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/restaurant-app-backend.git
+   git clone https://github.com/nitin611/ResturantAppBackend.git
    cd restaurant-app-backend
 
 

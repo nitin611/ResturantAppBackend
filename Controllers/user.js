@@ -1,6 +1,8 @@
 const express=require('express')
 const userModel=require("../Models/user");
 const bcrypt = require('bcrypt');
+const jwt=require('jsonwebtoken')
+const jwtSecret=process.env.JWT_SECRET
 exports.signupController=async(req,res)=>{
     try {
         const {name,email,password,address,phone,Role,profile}=req.body;
@@ -49,21 +51,29 @@ exports.loginController=async(req,res)=>{
             })
         }
         // check user Exist or not-
-        const ExistingUser=await userModel.findOne({email});
-        if(!ExistingUser){
+        const User=await userModel.findOne({email});
+        if(!User){
             return res.status(403).send({
 
                 success:false,
                 msg:"User is not found"
             })
         }
-        
+
         // hashed password ko decrypt karke password se match karo-
-        const passwordMatch = await bcrypt.compare(password, ExistingUser.password);
+        const passwordMatch = await bcrypt.compare(password, User.password);
         if (passwordMatch) {
+            const payload={
+                id:User._id,
+                Role:User.Role
+            }
+            const token=jwt.sign(payload,jwtSecret,{expiresIn:"2h"});
             return res.status(200).send({
                 success: true,
-                msg: "User logged in successfully"
+                msg: "User logged in successfully",
+                data:User,
+                token
+
             });
         } else {
             return res.status(403).send({

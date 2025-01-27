@@ -39,3 +39,43 @@ exports.signupController=async(req,res)=>{
 }
 
 // signIn Controller-
+exports.loginController=async(req,res)=>{
+    try {
+        const {email,password}=req.body
+        if(!email || !password){
+            return res.status(403).send({
+                success:false,
+                msg:"All fields are required"
+            })
+        }
+        // check user Exist or not-
+        const ExistingUser=await userModel.findOne({email});
+        if(!ExistingUser){
+            return res.status(403).send({
+
+                success:false,
+                msg:"User is not found"
+            })
+        }
+        
+        // hashed password ko decrypt karke password se match karo-
+        const passwordMatch = await bcrypt.compare(password, ExistingUser.password);
+        if (passwordMatch) {
+            return res.status(200).send({
+                success: true,
+                msg: "User logged in successfully"
+            });
+        } else {
+            return res.status(403).send({
+                success: false,
+                msg: "Password does not match"
+            });
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            success:false,
+            msg:"User not Registered"
+        })
+    }
+}

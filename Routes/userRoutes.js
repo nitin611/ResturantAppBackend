@@ -8,9 +8,6 @@ router.post("/signup",signupController)
 // login-
 router.post("/signin",loginController)
 
-
-
-
-
 module.exports=router;
+
 

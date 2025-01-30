@@ -92,16 +92,33 @@ exports.loginController=async(req,res)=>{
     }
 }
 
+
+
+
 // get user controller-
 exports.getUser=async(req,res)=>{
     try {
-        
+        const allUsers=await userModel.find({});
+        return res.status(200).send({
+            success:true,
+            msg:"All Users fetched Successfully"
+        })
     } catch (err) {
         console.log(err)
         return res.status(500).send({
             success:false,
             msg:"Server error in fetching all the users"
         })
+        
+    }
+}
+
+exports.deleteUser=async(req,res)=>{
+    try {
+       
+    } catch (err) {
+        console.log(err)
+        return
         
     }
 }

@@ -1,6 +1,6 @@
 const express=require('express');
 const { signupController, loginController,getUser } = require('../Controllers/user');
-
+const {auth}=require("../middleware/authMiddleware")
 const router=express.Router();
 
 
@@ -9,9 +9,14 @@ router.post("/signup",signupController);
 // login-
 router.post("/signin",loginController);
 
-// protected Routes-
 
+// get all users-
 router.get("/getUsers",getUser)
+
+//--------------------------------- protected Routes------------------------------------------
+router.get("/userData",auth,userData);
+
+router.delete("/deleteUser",auth,deleteUser)
 
 module.exports=router;
 

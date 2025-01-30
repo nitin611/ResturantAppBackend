@@ -113,6 +113,33 @@ exports.getUser=async(req,res)=>{
     }
 }
 
+exports.userData=async(req,res)=>{
+    try {
+        // req.user is attached in auth middleware-
+        const id=req.user.id
+        // check if user is there with this id or not-
+
+        const user=await User.findById(id);
+        if(!user){
+            return res.status(403).send({
+                success:false,
+                msg:"User does not exist"
+            })
+        }
+        user.password=undefined;
+        return res.status(200).send({
+            success:true,
+            msg:"User fetched successfully!!",
+            user
+        })
+    } catch (err) {
+        return res.status(500).send({
+            success:false,
+            msg:'Server error in fetching the user'
+        })
+    }
+}
+
 exports.deleteUser=async(req,res)=>{
     try {
        

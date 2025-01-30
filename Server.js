@@ -15,10 +15,12 @@ app.use(morgan('dev'));
 
 // Routes
 const userRoutes = require('./Routes/userRoutes');
+const categoryRoutes=require('./Routes/categoryRoutes')
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/category',categoryRoutes)
 
 // Server
-const PORT = process.env.PORT || 5000; // Add a fallback port
+const PORT = process.env.PORT || 5000; 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

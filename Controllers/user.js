@@ -69,6 +69,7 @@ exports.loginController=async(req,res)=>{
                 Role:User.Role
             }
             const token=jwt.sign(payload,jwtSecret,{expiresIn:"2h"});
+             User.password=undefined;
             return res.status(200).send({
                 success: true,
                 msg: "User logged in successfully",
@@ -88,5 +89,19 @@ exports.loginController=async(req,res)=>{
             success:false,
             msg:"User not Registered"
         })
+    }
+}
+
+// get user controller-
+exports.getUser=async(req,res)=>{
+    try {
+        
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send({
+            success:false,
+            msg:"Server error in fetching all the users"
+        })
+        
     }
 }

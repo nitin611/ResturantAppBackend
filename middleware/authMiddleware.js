@@ -12,7 +12,7 @@ exports.auth=(req,res,next)=>{
             })
         }
         // verify the token-
-        const tokenVerified=jwt.verify(token,JWT_SECRET);
+        const tokenVerified=jwt.verify(token,jwtSecret);
         console.log("Decoded token is:",tokenVerified);
         req.user=tokenVerified;
         next();

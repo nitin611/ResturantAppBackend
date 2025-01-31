@@ -36,6 +36,7 @@ exports.createCategory=async(req,res)=>{
     }
 }
 // get all categories-
+
 exports.getCategories=async(req,res)=>{
     try {
         const categories=await Category.find({});
@@ -53,6 +54,7 @@ exports.getCategories=async(req,res)=>{
         
     }
 }
+
 
 // updating the categories-
 exports.updateCategories=async(req,res)=>{

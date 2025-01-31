@@ -1,18 +1,24 @@
-const express=require('express');
+const express = require("express");
 const {auth}=require("../middleware/authMiddleware")
+const {
+    createRestaurant,
+    getRestaurant,
+    updateRestaurant,
+    deleteRestaurant
+} = require("../Controllers/Resturant");
 
-const router=express.Router();
+const router = express.Router();
 
+// ✅ Create Restaurant (Protected)
+router.post("/createRestaurant", auth, createRestaurant);
 
-// create Resturant-
-router.post("/createResturant",auth,)
+// ✅ Get Restaurant Details by ID
+router.get("/get/:id", getRestaurant);
 
-// get resturant Details-
+// ✅ Update Restaurant Details (Protected)
+router.put("/update/:id", auth, updateRestaurant);
 
-// update Resturant details-
+// ✅ Delete Restaurant (Protected)
+router.delete("/delete/:id", auth, deleteRestaurant);
 
-// delete Resturant details-
-
-module.exports=router;
-
-
+module.exports = router;

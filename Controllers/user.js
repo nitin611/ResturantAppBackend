@@ -225,7 +225,19 @@ exports.updatePassword=async(req,res)=>{
 
 exports.deleteUser=async(req,res)=>{
     try {
-       
+       const id=req.user.id;
+       const user=await userModel.findById(id);
+       if(!user){
+        return res.status(403).send({
+            success:false,
+            msg:"user not found"
+        })
+       }
+       const deleteUser=await userModel.findByIdAndDelete(id);
+       return res.status(200).send({
+        success:true,
+        msg:"User deleted successfully"
+       });
     } catch (err) {
         console.log(err)
         return

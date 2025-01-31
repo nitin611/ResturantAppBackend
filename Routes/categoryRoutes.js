@@ -6,6 +6,6 @@ const {createCategory,getCategories,updateCategories,deleteCategory}=require("..
 router.post("/createCategory",createCategory);
 router.get("/categories",getCategories);
 router.put("/updateCategories/:id",updateCategories);
-router.delete("/deleteCategory",deleteCategory);
+router.delete("/deleteCategory/:id",deleteCategory);
 
 module.exports=router;

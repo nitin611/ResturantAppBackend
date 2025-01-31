@@ -15,9 +15,11 @@ app.use(morgan('dev'));
 
 // Routes
 const userRoutes = require('./Routes/userRoutes');
-const categoryRoutes=require('./Routes/categoryRoutes')
+const categoryRoutes=require('./Routes/categoryRoutes');
+const resturant=require('./Routes/resturantRoutes')
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/category',categoryRoutes)
+app.use('/api/v1/resturant',resturant)
 
 // Server
 const PORT = process.env.PORT || 5000; 
